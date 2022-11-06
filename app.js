@@ -1,9 +1,8 @@
 /* Week 5 Coding Assignment */
-const readline = require('readline');
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
 class Comic {
     constructor(name, issue, year, pub){
@@ -42,7 +41,6 @@ class ComicCollection {
     }
     start(){
         let collectSelect = this.showCollectionOptions();
-        while (collectSelect != 0){
             switch(collectSelect){
                 case '1': this.startBox();
                 break;
@@ -54,23 +52,20 @@ class ComicCollection {
                 break;
                 default: collectSelect = 0;
             }
-            collectSelect = this.showCollectionOptions();
         }
-        alert('Goodbye!');
-    }
 
     showCollectionOptions(){
-        return rl.question(`
+        readline.question(`
         1 - Start New Comic Box
         2 - View a Comic Box
         3 - Remove a Comic Box
         4 - Display list of current Comic Boxes
         0 - Exit
-        `,function(answer){rl.cose();});
+        `,function(collectSelect){rl.cose();});
     }
 
     showComicBoxOptions(comicInfo){
-        return rl.question(`
+        readline.question(`
             0 - Back
             1 - Add Comic
             2 - Remove Comic
@@ -80,12 +75,12 @@ class ComicCollection {
     }
 
     startBox(){
-        let newBox = rl.question('Enter a label for your New Box of Comics:');
+        let newBox = readline.question('Enter a label for your New Box of Comics:');
         this.boxes.push(new Box(newBox));
     }
 
     viewBox(){
-        let index = prompt('Enter the number for the Comic Box you wish to view:');
+        let index = readline.question('Enter the number for the Comic Box you wish to view:');
         if (index > -1 && index < this.boxes.length){
             this.boxSelection = this.boxes[index];
             let boxContents = this.boxSelection.label + '\n';
@@ -104,10 +99,10 @@ class ComicCollection {
     }
 
     addComicToBox(){
-        let name = prompt('What is the name of the Comic?');
-        let issue = prompt('What issue is it?');
-        let year = prompt('What year did the comic come out?');
-        let publisher = prompt('Who published it?');
+        let name = readline.question('What is the name of the Comic?');
+        let issue = readline.question('What issue is it?');
+        let year = readline.question('What year did the comic come out?');
+        let publisher = readline.question('Who published it?');
         this.boxSelection.addComic(name,issue,year,publisher); //Mention the "push new Class" here.
     }
 
